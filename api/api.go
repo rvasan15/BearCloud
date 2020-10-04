@@ -115,8 +115,8 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(response, username+"\n"+password)
-
+	fmt.Fprintln(response, username)
+	fmt.Fprintln(response, password)
 }
 
 func signup(response http.ResponseWriter, request *http.Request) {
