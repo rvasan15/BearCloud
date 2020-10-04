@@ -8,6 +8,8 @@ import (
 	"github.com/gorilla/mux"
 
 	"fmt"
+
+	"strings"
 )
 
 //Declare a global array of Credentials
@@ -233,7 +235,7 @@ func getPassword(response http.ResponseWriter, request *http.Request) {
 
 	for _, c := range credentials {
 
-		if c.Username == username {
+		if strings.Compare(c.Username, username) == 0 {
 			password = c.Password
 			break
 		}
@@ -279,7 +281,7 @@ func updatePassword(response http.ResponseWriter, request *http.Request) {
 
 	for _, c := range credentials {
 
-		if c.Username == username {
+		if strings.Compare(c.Username, username) == 0 {
 			c.Password = password
 			break
 		}
@@ -325,7 +327,7 @@ func deleteUser(response http.ResponseWriter, request *http.Request) {
 
 	for i, c := range credentials {
 
-		if c.Username == username {
+		if strings.Compare(c.Username, username) == 0 {
 			credentials = remove(credentials, i)
 			break
 		}
