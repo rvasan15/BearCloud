@@ -312,7 +312,7 @@ func deleteUser(response http.ResponseWriter, request *http.Request) {
 	/*YOUR CODE HERE*/
 
 	newCredentials := Credentials{}
-	username := request.URL.Query().Get("username")
+	//username := request.URL.Query().Get("username")
 
 	//take the credential in the request and move the contents to our credential
 	err := json.NewDecoder(request.Body).Decode(&newCredentials)
@@ -323,7 +323,7 @@ func deleteUser(response http.ResponseWriter, request *http.Request) {
 
 	for i, c := range credentials {
 
-		if c.Username == username {
+		if c.Username == newCredentials.Username {
 			credentials = remove(credentials, i)
 			break
 		}
