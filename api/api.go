@@ -3,7 +3,6 @@ package api
 import (
 	"encoding/json"
 	"net/http"
-	"os"
 	"strconv"
 
 	"github.com/gorilla/mux"
@@ -222,7 +221,7 @@ func getPassword(response http.ResponseWriter, request *http.Request) {
 
 	/*YOUR CODE HERE*/
 	newCredentials := Credentials{}
-	username := request.URL.Query().Get("username")
+	//username := request.URL.Query().Get("username")
 	//take the credential in the request and move the contents to our credential
 	err := json.NewDecoder(request.Body).Decode(&newCredentials)
 	if err != nil {
@@ -234,7 +233,7 @@ func getPassword(response http.ResponseWriter, request *http.Request) {
 
 	for _, c := range credentials {
 
-		if c.Username == username {
+		if c.Username == newCredentials.Username {
 			password = c.Password
 			break
 		}
@@ -280,7 +279,7 @@ func updatePassword(response http.ResponseWriter, request *http.Request) {
 
 	for _, c := range credentials {
 
-		if c.Username == "username" {
+		if c.Username == newCredentials.Username {
 			c.Password = "password"
 			break
 		}
@@ -313,7 +312,10 @@ func deleteUser(response http.ResponseWriter, request *http.Request) {
 	/*YOUR CODE HERE*/
 
 	newCredentials := Credentials{}
-	// username := request.URL.Query().Get("username")
+	username := request.URL.Query().Get("username")
+
+	//create a new json decoder that will allow us to decode the request body
+	//jsonDecoder := json.NewDecoder(request.Body)
 
 	//take the credential in the request and move the contents to our credential
 	err := json.NewDecoder(request.Body).Decode(&newCredentials)
@@ -324,7 +326,7 @@ func deleteUser(response http.ResponseWriter, request *http.Request) {
 
 	//var index int
 
-	username := os.Getenv("username")
+	//username := os.Getenv("username")
 
 	for i, c := range credentials {
 
