@@ -115,8 +115,8 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	fmt.Fprintln(response, username)
-	fmt.Fprintln(response, password)
+	fmt.Fprintln(response, username+"\n")
+	fmt.Fprintln(response, password+"\n")
 	return
 }
 
@@ -179,7 +179,7 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 
 	//create a credential
 	newCredentials := Credentials{}
-	username := request.URL.Query().Get("username")
+	//username := request.URL.Query().Get("username")
 	//take the credential in the request and move the contents to our credential
 	err := json.NewDecoder(request.Body).Decode(&newCredentials)
 	if err != nil {
@@ -191,7 +191,7 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 
 	for i, c := range credentials {
 
-		if c.Username == username {
+		if c.Username == newCredentials.Username {
 			index = i
 			break
 		}
@@ -280,7 +280,7 @@ func updatePassword(response http.ResponseWriter, request *http.Request) {
 	for _, c := range credentials {
 
 		if c.Username == newCredentials.Username {
-			c.Password = "password"
+			c.Password = newCredentials.Password
 			break
 		}
 	}
