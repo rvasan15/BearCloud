@@ -115,8 +115,8 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	fmt.Fprintln(response, username+"\n")
-	fmt.Fprintln(response, password+"\n")
+	fmt.Fprintf(response, username+"\n")
+	fmt.Fprintf(response, password+"\n")
 	return
 }
 
