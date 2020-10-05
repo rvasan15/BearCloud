@@ -97,8 +97,8 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 
 	/*YOUR CODE HERE*/
 
-	username := request.URL.Query().Get("username")
-	password := request.URL.Query().Get("password")
+	// username := request.URL.Query().Get("username")
+	// password := request.URL.Query().Get("password")
 
 	//create an empty credential
 	credentials := Credentials{}
@@ -115,8 +115,8 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(response, username+"\n")
-	fmt.Fprintf(response, password+"\n")
+	fmt.Fprintf(response, credentials.Username+"\n")
+	fmt.Fprintf(response, credentials.Password+"\n")
 	return
 }
 
@@ -314,19 +314,12 @@ func deleteUser(response http.ResponseWriter, request *http.Request) {
 	newCredentials := Credentials{}
 	username := request.URL.Query().Get("username")
 
-	//create a new json decoder that will allow us to decode the request body
-	//jsonDecoder := json.NewDecoder(request.Body)
-
 	//take the credential in the request and move the contents to our credential
 	err := json.NewDecoder(request.Body).Decode(&newCredentials)
 	if err != nil {
 		http.Error(response, err.Error(), http.StatusBadRequest)
 		return
 	}
-
-	//var index int
-
-	//username := os.Getenv("username")
 
 	for i, c := range credentials {
 
