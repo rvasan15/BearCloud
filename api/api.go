@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/gorilla/mux"
@@ -323,9 +324,11 @@ func deleteUser(response http.ResponseWriter, request *http.Request) {
 
 	//var index int
 
+	username := os.Getenv("username")
+
 	for i, c := range credentials {
 
-		if c.Username == "username" {
+		if c.Username == username {
 			credentials = remove(credentials, i)
 			break
 		}
