@@ -187,18 +187,17 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	var index int
+	//var index int
 
 	for i, c := range credentials {
 
 		if c.Username == newCredentials.Username {
-			index = i
+			fmt.Fprintf(response, strconv.Itoa(i))
 			break
 		}
 	}
 
-	fmt.Fprintf(response, strconv.Itoa(index))
-	return
+	http.Error(response, "No such index exists", http.StatusBadRequest)
 
 }
 
