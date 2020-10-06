@@ -278,9 +278,12 @@ func updatePassword(response http.ResponseWriter, request *http.Request) {
 
 		if c.Username == newCredentials.Username {
 			c.Password = newCredentials.Password
-			break
+			return
 		}
 	}
+
+	http.Error(response, "No password found", http.StatusBadRequest)
+	return
 
 }
 
