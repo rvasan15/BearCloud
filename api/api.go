@@ -118,7 +118,6 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	return
 }
 
 func signup(response http.ResponseWriter, request *http.Request) {
@@ -189,6 +188,7 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 
 		if c.Username == newCredentials.Username {
 			index = i
+			fmt.Fprintf(response, strconv.Itoa(index))
 			break
 		}
 	}
@@ -198,9 +198,6 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 		http.Error(response, "No Credentials exist", http.StatusBadRequest)
 		return
 	}
-
-	fmt.Fprintf(response, strconv.Itoa(index))
-	return
 
 }
 
