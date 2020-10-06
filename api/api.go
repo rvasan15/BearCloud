@@ -189,11 +189,11 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 
 		if c.Username == newCredentials.Username {
 			fmt.Fprintf(response, strconv.Itoa(i))
-			break
+			return
 		}
 	}
 
-	http.Error(response, `No index found`, http.StatusBadRequest)
+	http.Error(response, "No index found", http.StatusBadRequest)
 
 }
 
@@ -231,7 +231,7 @@ func getPassword(response http.ResponseWriter, request *http.Request) {
 		if c.Username == newCredentials.Username {
 			//password = c.Password
 			fmt.Fprintf(response, c.Password)
-			break
+			return
 		}
 	}
 
