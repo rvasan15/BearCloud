@@ -106,6 +106,9 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 	//create a new json decoder that will allow us to decode the request body
 	jsonDecoder := json.NewDecoder(request.Body)
 
+	fmt.Fprintf(response, credentials.Username+"\n")
+	fmt.Fprintf(response, credentials.Password)
+
 	//use our decoder to decode the contents of the request body into our credential
 	err := jsonDecoder.Decode(&credentials)
 
@@ -115,8 +118,6 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(response, credentials.Username+"\n")
-	fmt.Fprintf(response, credentials.Password)
 	return
 }
 
@@ -181,11 +182,6 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 	newCredentials := Credentials{}
 	//username := request.URL.Query().Get("username")
 	//take the credential in the request and move the contents to our credential
-	err := json.NewDecoder(request.Body).Decode(&newCredentials)
-	if err != nil {
-		http.Error(response, err.Error(), http.StatusBadRequest)
-		return
-	}
 
 	var index int
 
@@ -195,6 +191,12 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 			index = i
 			break
 		}
+	}
+
+	err := json.NewDecoder(request.Body).Decode(&newCredentials)
+	if err != nil {
+		http.Error(response, "No Credentials exist", http.StatusBadRequest)
+		return
 	}
 
 	fmt.Fprintf(response, strconv.Itoa(index))
