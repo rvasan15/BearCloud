@@ -110,13 +110,16 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 	err := jsonDecoder.Decode(&credentials)
 
 	//Check if we got an error. If err != nil, that function returned an error
-	if err != nil {
-		http.Error(response, "No JSON file given", http.StatusBadRequest)
+	if err != nil || credentials.Username == "" || credentials.Password == "" {
+		http.Error(response, "No JSON file exists", http.StatusBadRequest)
 		return
 	}
 
 	fmt.Fprintf(response, credentials.Username+"\n")
 	fmt.Fprintf(response, credentials.Password)
+
+	//http.Error(response, "No JSON file exists", http.StatusBadRequest)
+
 	return
 }
 
@@ -229,13 +232,11 @@ func getPassword(response http.ResponseWriter, request *http.Request) {
 	for _, c := range credentials {
 
 		if c.Username == newCredentials.Username {
-			//password = c.Password
 			fmt.Fprintf(response, c.Password)
 			return
 		}
 	}
 
-	//fmt.Fprintf(response, password)
 	http.Error(response, "No password found", http.StatusBadRequest)
 	return
 
