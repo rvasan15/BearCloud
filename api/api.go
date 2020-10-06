@@ -279,6 +279,7 @@ func updatePassword(response http.ResponseWriter, request *http.Request) {
 
 		if c.Username == newCredentials.Username {
 			c.Password = newCredentials.Password
+			break
 		}
 	}
 
