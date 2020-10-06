@@ -111,13 +111,13 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 
 	//Check if we got an error. If err != nil, that function returned an error
 	if err != nil {
-		http.Error(response, "No JSON file inputted", http.StatusBadRequest)
+		http.Error(response, err.Error(), http.StatusBadRequest)
 		return
 	}
 
 	fmt.Fprintf(response, credentials.Username+"\n")
 	fmt.Fprintf(response, credentials.Password)
-
+	return
 }
 
 func signup(response http.ResponseWriter, request *http.Request) {
@@ -181,23 +181,24 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 	newCredentials := Credentials{}
 	//username := request.URL.Query().Get("username")
 	//take the credential in the request and move the contents to our credential
-
-	//var index int
-
 	err := json.NewDecoder(request.Body).Decode(&newCredentials)
+	if err != nil {
+		http.Error(response, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	var index int
 
 	for i, c := range credentials {
 
 		if c.Username == newCredentials.Username {
-			//index = i
-			fmt.Fprintf(response, strconv.Itoa(i))
+			index = i
+			break
 		}
 	}
 
-	if err != nil {
-		http.Error(response, "No Credentials exist", http.StatusBadRequest)
-		return
-	}
+	fmt.Fprintf(response, strconv.Itoa(index))
+	return
 
 }
 
