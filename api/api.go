@@ -111,7 +111,7 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 
 	//Check if we got an error. If err != nil, that function returned an error
 	if err != nil {
-		http.Error(response, err.Error(), http.StatusBadRequest)
+		http.Error(response, "No JSON file given", http.StatusBadRequest)
 		return
 	}
 
