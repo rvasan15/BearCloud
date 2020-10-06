@@ -265,8 +265,6 @@ func updatePassword(response http.ResponseWriter, request *http.Request) {
 	/*YOUR CODE HERE*/
 
 	newCredentials := Credentials{}
-	// username := request.URL.Query().Get("username")
-	// password := request.URL.Query().Get("password")
 
 	//take the credential in the request and move the contents to our credential
 	err := json.NewDecoder(request.Body).Decode(&newCredentials)
