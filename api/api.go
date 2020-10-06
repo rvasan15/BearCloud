@@ -106,9 +106,6 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 	//create a new json decoder that will allow us to decode the request body
 	jsonDecoder := json.NewDecoder(request.Body)
 
-	fmt.Fprintf(response, credentials.Username+"\n")
-	fmt.Fprintf(response, credentials.Password)
-
 	//use our decoder to decode the contents of the request body into our credential
 	err := jsonDecoder.Decode(&credentials)
 
@@ -117,6 +114,9 @@ func getJSON(response http.ResponseWriter, request *http.Request) {
 		http.Error(response, "No JSON file inputted", http.StatusBadRequest)
 		return
 	}
+
+	fmt.Fprintf(response, credentials.Username+"\n")
+	fmt.Fprintf(response, credentials.Password)
 
 }
 
@@ -182,18 +182,18 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 	//username := request.URL.Query().Get("username")
 	//take the credential in the request and move the contents to our credential
 
-	var index int
+	//var index int
+
+	err := json.NewDecoder(request.Body).Decode(&newCredentials)
 
 	for i, c := range credentials {
 
 		if c.Username == newCredentials.Username {
-			index = i
-			fmt.Fprintf(response, strconv.Itoa(index))
-			break
+			//index = i
+			fmt.Fprintf(response, strconv.Itoa(i))
 		}
 	}
 
-	err := json.NewDecoder(request.Body).Decode(&newCredentials)
 	if err != nil {
 		http.Error(response, "No Credentials exist", http.StatusBadRequest)
 		return
