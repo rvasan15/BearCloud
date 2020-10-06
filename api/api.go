@@ -177,17 +177,13 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 
 	/*YOUR CODE HERE*/
 
-	//create a credential
 	newCredentials := Credentials{}
-	//username := request.URL.Query().Get("username")
-	//take the credential in the request and move the contents to our credential
+
 	err := json.NewDecoder(request.Body).Decode(&newCredentials)
 	if err != nil {
 		http.Error(response, err.Error(), http.StatusBadRequest)
 		return
 	}
-
-	//var index int
 
 	for i, c := range credentials {
 
@@ -228,17 +224,19 @@ func getPassword(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	var password string
+	//var password string
 
 	for _, c := range credentials {
 
 		if c.Username == newCredentials.Username {
-			password = c.Password
+			//password = c.Password
+			fmt.Fprintf(response, c.Password)
 			break
 		}
 	}
 
-	fmt.Fprintf(response, password)
+	//fmt.Fprintf(response, password)
+	http.Error(response, "No password found", http.StatusBadRequest)
 	return
 
 }
