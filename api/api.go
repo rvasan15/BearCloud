@@ -265,6 +265,8 @@ func updatePassword(response http.ResponseWriter, request *http.Request) {
 	/*YOUR CODE HERE*/
 
 	newCredentials := Credentials{}
+	// username := request.URL.Query().Get("username")
+	// password := request.URL.Query().Get("password")
 
 	//take the credential in the request and move the contents to our credential
 	err := json.NewDecoder(request.Body).Decode(&newCredentials)
@@ -276,8 +278,7 @@ func updatePassword(response http.ResponseWriter, request *http.Request) {
 	for _, c := range credentials {
 
 		if c.Username == newCredentials.Username {
-			newCredentials.Password = c.Password
-			return
+			c.Password = newCredentials.Password
 		}
 	}
 
