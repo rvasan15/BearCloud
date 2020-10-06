@@ -325,10 +325,10 @@ func deleteUser(response http.ResponseWriter, request *http.Request) {
 
 		if c.Username == newCredentials.Username {
 			credentials = remove(credentials, i)
-			break
+			return
 		}
 	}
-
+	http.Error(response, "No user found", http.StatusBadRequest)
 	return
 }
 
