@@ -270,8 +270,8 @@ func updatePassword(response http.ResponseWriter, request *http.Request) {
 
 	//take the credential in the request and move the contents to our credential
 	err := json.NewDecoder(request.Body).Decode(&newCredentials)
-	if err != nil {
-		http.Error(response, err.Error(), http.StatusBadRequest)
+	if err != nil || newCredentials.Username == "" || newCredentials.Password == "" {
+		http.Error(response, "No Username/Password found", http.StatusBadRequest)
 		return
 	}
 
