@@ -282,7 +282,7 @@ func updatePassword(response http.ResponseWriter, request *http.Request) {
 		}
 	}
 
-	http.Error(response, "No password found", http.StatusBadRequest)
+	//http.Error(response, "No password found", http.StatusBadRequest)
 	return
 
 }
