@@ -282,9 +282,6 @@ func updatePassword(response http.ResponseWriter, request *http.Request) {
 		}
 	}
 
-	//http.Error(response, "No password found", http.StatusBadRequest)
-	return
-
 }
 
 func deleteUser(response http.ResponseWriter, request *http.Request) {
