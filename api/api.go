@@ -146,11 +146,11 @@ func signup(response http.ResponseWriter, request *http.Request) {
 	err := json.NewDecoder(request.Body).Decode(&newCredentials)
 	if err != nil {
 		http.Error(response, err.Error(), http.StatusBadRequest)
-		response.WriteHeader(201)
 		return
 	}
 
 	credentials = append(credentials, newCredentials)
+	response.WriteHeader(201)
 
 	return
 
@@ -197,7 +197,7 @@ func getIndex(response http.ResponseWriter, request *http.Request) {
 		}
 	}
 
-	http.Error(response, "No such index exists", http.StatusBadRequest)
+	http.Error(response, `No index found`, http.StatusBadRequest)
 
 }
 
