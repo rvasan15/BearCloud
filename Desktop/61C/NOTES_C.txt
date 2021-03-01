@@ -1,0 +1,282 @@
+jajv
+
+jajv
+<A>
+{//ACRONYMS
+- B2A: Box to Address: &
+- A2C: Address to Content: *
+- A2F: Address to Field: ->
+- Array name also acts like an address
+	- int arr1[4] = {1,2,3,4};
+
+    //int *pInt1 = &arr1[3];
+    int *pInt1 = arr1;
+    printf("*pInt1 %d\n",*pInt1);
+    printf("*(pInt1+3) %d\n",*(pInt1+3));
+
+//ACRONYMS
+}
+</A>
+<B>
+</B>
+<C>
+</C>
+<D>
+</D>
+<E>
+</E>
+<F>
+</F>
+<G>	
+</G>
+<H>
+</H>
+<I>
+</I>
+<J>
+</J>
+<K>
+</K>
+<L>
+</L>
+<M>
+{//MALLOC
+ //- Static alloc of 10 ints
+ int arr1[10];
+
+ //- Static alloc with initialization
+ int arr2[10] = {1,2,3,4,5,6,7,8,9.10};
+
+ //- dynamic allocation of int array
+ int *pArr1 = (int *)malloc(sizeof(int)*10);
+
+ struct HashBucket **ppHashBucket = (struct HashBucket **)malloc(sizeof(struct HashBucket *)*10); 
+
+ //Alloc dynamic string (array of chars) of size numChars
+ char *pCharArr = (char *)malloc(sizeof(char)*numChars);
+
+ //Alloc dynamic array of char ptrs/addresses with numAddrs slots, ie. each slot in array
+ //holds an address
+ char **ppCharArr = (char **)malloc(sizeof(char *) * numAddrs);
+
+//MALLOC
+}
+</M>
+<N>
+</N>
+<O>
+</O>
+<P>
+{//PTR
+- Star gets used in 3 places
+  - Rect *pRect = &rect;
+    - Ptr or address declaration (aka alloc space)
+  - Casting : Convert one addr type to another
+    - printf("*((int*)(((int*)pRect1)+1)) : %d\n",*((int*)(((int*)pRect1)+1)));
+  - Content access : ADDR_TO_CONTENT_*
+    - *((int*)pRect) 
+
+- Arrow 
+  - pRect->x : Get field access using ptr and name of the field    
+
+//PTR
+}
+</P>
+<Q>
+</Q>
+<R>
+{//REFS
+- C W3schools
+
+//REFS
+}
+</R>
+<S>
+{//SPEC
+- philfix is the program to code/run as a replacment engine
+  - philfix has to read in a dictionary of key words and its replacement
+  - dict : hashtable
+    - Input  : Ip
+    - engine : eng
+
+- IN
+  - Input can be any string of any length that needs to be processed by 
+    philfix as a word replacement engine
+- OUT
+  - Ip ... eng
+
+- Replacement happens using a priority condition
+  - Identical match
+  - First char is caps, and all other chars lower case
+  - all lower case
+
+
+//SPEC
+}
+{//STRUCT
+
+//STRUCT
+}
+</S>
+<T>
+{//TODO
+- Read the spec and make notes and come up with questions
+- Read hashtable presentation
+- Search how to build a hashtable in C
+- Read file processing apis
+  - fopen
+  - fclose
+  - fwrite
+  - fread
+- C tutorial W3Schools
+  - String processing
+  - Mem processing malloc, calloc
+  - Ptr arithmetic
+  - Struct alloc
+  - File processing
+- Figure out how to set up project in VSCode using starter code and how to debug
+
+//TODO
+}
+</T>
+<U>
+</U>
+<V>
+</V>
+<W>
+</W>
+<X>
+</X>
+<Y>
+</Y>
+<Z>
+</Z>
+
+
+
+
+{//QUESTIONS
+- What does a type indicate for a variable
+  - var
+  - int : 4B
+  - boolean : 1B
+  - short int : 2B
+  - long int  : 4B
+  - double    : 8B if on a 64 bit processor, otherwise it is still 4B
+  - char      : 1B
+  - char *    : 4B
+  - int **    : 4B ptr to a ptr
+
+- What is a struct?
+  - A combination of types
+  - struct Rect
+    {
+      boolean b1;
+      boolean b2;
+      boolean b3;
+      boolean b4;
+      
+      int x;
+      int y;
+      boolean b1;
+      int wd;
+      int ht;
+    }
+  - typedef sruct Rect Rect //Defining an alias
+  - int getArea(Rect *pRect)
+    {
+      int area = pRect->wd * pRect->ht;
+      return area;
+    }
+
+  - Name based access of struct contents
+    - Rect rect = {0,0,10,10};  
+    - rect.x = 10;
+    - Rect *pRect = &rect;
+    - pRect->x += 10;
+    - printf("%d\n",pRect->x);
+    - Rect rect = malloc(sizeof(Rect));
+    - calloc
+
+- struct variable alignment
+  - 4 byte alignment
+
+- How to alloc string
+  - "Rini is cool"
+  - char *pc1 = "Rini is Cool";
+  - char *pc2 = (char *)malloc(13);
+  - strcpy(pc2,pc1);
+  - String str = "abc";
+
+- What is the difference between OOP program and a C program
+  - What is an object and why you need it
+    - encapsulation
+      - provides protection of data
+    - re-usability using derived classes
+       
+  - Why does C not provide it
+
+
+- What is a ptr and how it relates to address
+	- ptr and address are the same, it is an alias
+- What is the difference between a handle and a memory address
+  - 
+
+- What is the max val that can be stores in 1B, 2B, 4B
+  - 1B : 2^8-1  : 255
+  - 2B : 2^16-1 : 65535
+  - 4B : 2^32-1 : 4294967295 : 4Billion bytes
+  - 16GB RAM : 16 billion bytes
+    - 8B 
+
+- What are main parts of a computer
+  - CPU
+  - RAM
+    - Chip based but can communicate at < 10 ns
+  - DISK
+    - Flash disk
+      - electronic chip based but much slower than RAM
+      - 100+ ns
+
+    - Hard disk
+      - mechanical spinning disks
+- What is a process
+  - It is a program in execution 
+  - STD
+  - Stack segment
+  - Text segment
+  - Data segment  : also called heap
+
+- what is valgrind
+  - It is a tool to help figure out memory errors including 
+    - mem overwrites
+    - unint mem reads
+
+//QUESTIONS
+}
+
+{//MEM_ALLOC
+- int i = 0;    //4B
+- char c = 'a'; //1B	
+- double d = '7.7'; 
+- int pi = &i;
+
+//MEM_ALLOC
+}
+
+COMMON_JAVA_C
+- Both are typed languages
+  - unlike javascript
+
+- JS 
+  - var hashVal = 0;
+    hashVal = "abcd";
+
+
+DIFF_JAVA_C
+
+- Memory management 
+  - Java
+  - C
+
+
