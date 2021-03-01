@@ -913,6 +913,7 @@ class TestClassify(TestCase):
         t.check_file_output(out_file, ref_file)
         t.check_stdout("2")
 
+
     @classmethod
     def tearDownClass(cls):
         print_coverage("classify.s", verbose=False)
@@ -942,8 +943,19 @@ class TestMain(TestCase):
                 f"outputs/test_basic_main/student{output_id}.bin"]
         reference = f"outputs/test_basic_main/reference{output_id}.bin"
 
+        # args = [f"{inputs}/m0.bin", f"{inputs}/m1.bin",
+        #         f"{inputs}/inputs/input0.bin",
+        #         f"outputs/test_basic_main/student{output_id}.bin"]
+        # reference = f"outputs/test_basic_main/reference{output_id}.bin"
+
+        # args = ["src/main.S", f"{inputs}/m0.bin", f"{inputs}/m1.bin",
+        #         f"{inputs}/inputs/input0.bin",
+        #         f"outputs/test_basic_main/student{output_id}.bin", "src/main.S"]
+        # reference = f"outputs/test_basic_main/reference{output_id}.bin"
+
+
+
         t= AssemblyTest(self, "main.s", no_utils=True)
-        #t.include("classify.s")
         t.call("main")
         t.execute(args=args)
         t.check_stdout(label)
